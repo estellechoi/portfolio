@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef } from "react";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const pages = [
+		{
+			id: 1,
+			name: "Github",
+			url: "https://github.com/estellechoi",
+		},
+	];
+
+	// When manipulating some variables, without re-rendering, just use useRef instead of useState.
+	const nextId = useRef(4);
+
+	const onCreate = () => {
+		console.log(nextId.current); // 4
+		nextId.current += 1;
+	};
+
+	return <div className="App"></div>;
 }
 
 export default App;
