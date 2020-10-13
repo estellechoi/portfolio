@@ -132,7 +132,7 @@ export default function Menu({ prjts }) {
 						{prjts.map((prjt, index) => (
 							<MenuItem key={index}>
 								<BoxLinkItem>
-									<a href={`/#${prjt.idName}`} alt={prjt.title}>
+									<a href={`/portfolio/#${prjt.idName}`} alt={prjt.title}>
 										{prjt.title}
 									</a>
 								</BoxLinkItem>
