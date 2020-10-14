@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.article`
@@ -51,13 +51,94 @@ const DescTitle = styled.h4`
 
 const DescContent = styled.div``;
 
-const PrjtImage = styled.img`
-	width: 100%;
+const ImageWrapper = styled.div`
 	border-radius: 10px;
 	box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	position: relative;
 `;
 
-export default function PrjtBox({ idName, head, subHead, repoUrl, desc }) {
+const ImageSlider = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	background-color: transparent;
+	opacity: 0;
+	transition: opacity 0.4s;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	&:hover {
+		opacity: 1;
+	}
+`;
+
+const ImageSliderBtn = styled.button`
+	height: 60px;
+	border: none;
+	padding: 0 15px;
+	font-size: 1.2rem;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #fff;
+	font-weight: 500;
+	border-radius: 0 10px 10px 0;
+	visibility: ${(props) => (props.hide ? "hidden" : "visible")};
+
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.7);
+	}
+`;
+
+const ImageSliderBtnNext = styled(ImageSliderBtn)`
+	border-radius: 10px 0 0 10px;
+`;
+
+const ImageBundle = styled.div`
+	display: flex;
+	transition: transform 0.4s;
+`;
+
+const Image = styled.img`
+	width: 100%;
+`;
+
+export default function PrjtBox({
+	idName,
+	head,
+	subHead,
+	repoUrl,
+	img,
+	desc,
+	width,
+}) {
+	// state
+	const [slideCnt, setSlideCnt] = useState(0);
+	const lastCnt = img.length - 1;
+	const isLast = slideCnt === lastCnt;
+	const isFirst = !slideCnt;
+
+	// methods
+	const imageStrap = useRef();
+	const translateImageStrap = (slideCnt) => {
+		imageStrap.current.style.transform = `translateX(-${width * slideCnt}px)`;
+	};
+
+	const slideBefore = () => {
+		if (slideCnt > 0) setSlideCnt((prev) => prev - 1);
+	};
+
+	const slideNext = () => {
+		if (slideCnt < lastCnt) setSlideCnt((prev) => prev + 1);
+	};
+
+	// update
+	useEffect(() => translateImageStrap(slideCnt));
+
+	// dom
 	return (
 		<Wrapper id={idName}>
 			<Head>{head}</Head>
@@ -66,15 +147,40 @@ export default function PrjtBox({ idName, head, subHead, repoUrl, desc }) {
 				<A href={repoUrl}>Click here to visit the repository.</A>
 			</ABox>
 
-			{desc.map((item) => (
-				<Desc>
+			<Desc>
+				<DescTitle>Preview</DescTitle>
+				<DescContent>
+					<ImageWrapper>
+						<ImageSlider>
+							<ImageSliderBtn
+								type="button"
+								onClick={slideBefore}
+								hide={isFirst}
+							>
+								←
+							</ImageSliderBtn>
+							<ImageSliderBtnNext
+								type="button"
+								onClick={slideNext}
+								hide={isLast}
+							>
+								→
+							</ImageSliderBtnNext>
+						</ImageSlider>
+
+						<ImageBundle ref={imageStrap}>
+							{img.map((item, index) => (
+								<Image key={index} src={item.src} alt={item.alt}></Image>
+							))}
+						</ImageBundle>
+					</ImageWrapper>
+				</DescContent>
+			</Desc>
+
+			{desc.map((item, index) => (
+				<Desc key={index}>
 					<DescTitle>{item.title}</DescTitle>
-					<DescContent>
-						<PrjtImage
-							src={item.content.src}
-							alt={item.content.alt}
-						></PrjtImage>
-					</DescContent>
+					<DescContent>{item.content}</DescContent>
 				</Desc>
 			))}
 		</Wrapper>
