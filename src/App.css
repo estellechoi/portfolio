@@ -23,6 +23,13 @@ a {
 	height: 100%;
 }
 
+a,
+button,
+[type="button"] {
+	cursor: pointer;
+	outline: none;
+}
+
 .app {
 	/* display: flex; */
 	position: relative;
