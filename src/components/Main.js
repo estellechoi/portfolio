@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import PrjtBox from "./PrjtBox";
 
@@ -15,9 +15,17 @@ const MainInner = styled.div`
 // data
 
 export default function Main({ prjts }) {
+	const mainInner = useRef();
+	let mainWidth = useRef(585);
+
+	const setNewWidth = () => (mainWidth.current = mainInner.current.clientWidth);
+
+	useEffect(setNewWidth, []);
+	// useEventListener Hook will be made soon to handle resize event.
+
 	return (
 		<MainWrapper role="main">
-			<MainInner>
+			<MainInner ref={mainInner}>
 				{prjts.map((prjt, index) => (
 					<PrjtBox
 						key={index}
@@ -25,7 +33,9 @@ export default function Main({ prjts }) {
 						head={prjt.title}
 						subHead={prjt.subTitle}
 						repoUrl={prjt.repoUrl}
+						img={prjt.img}
 						desc={prjt.desc}
+						width={mainWidth.current}
 					></PrjtBox>
 				))}
 			</MainInner>
