@@ -35,7 +35,7 @@ export default function SkillIcon({ src, alt}) {
 
     return (
             <IconWrapper>
-                <Icon>
+                <Icon title={alt}>
                     <IconImage src={src} alt={alt}></IconImage>
                 </Icon>
                 <IconShadow></IconShadow>
