@@ -6,6 +6,15 @@
 		"Helvetica Neue", Arial, sans-serif;
 }
 
+*::selection {
+	background-color: rgb(3, 136, 252);
+	color: #fff;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
 ul,
 h1,
 h2,
@@ -28,18 +37,4 @@ button,
 [type="button"] {
 	cursor: pointer;
 	outline: none;
-}
-
-.app {
-	/* display: flex; */
-	position: relative;
-}
-
-.header {
-	width: 250px;
-	height: 100vh;
-	overflow: scroll;
-	position: fixed;
-	top: 0;
-	left: 0;
 }
