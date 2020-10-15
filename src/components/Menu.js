@@ -1,17 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
+import { useEventListener } from "./../hooks/useEventListener";
 import styled from "styled-components";
+import { device } from "./../deviceSize";
+import Btn from "./Btn"
+import { BiPlus } from "react-icons/bi";
+
+
 
 // styled components
 const SideBarWrapper = styled.div`
-	border-right: 1px solid rgb(226, 230, 233);
 	width: 100%;
 	height: 100%;
+
+	@media ${device.tabletL} {
+		border-right: 1px solid rgb(226, 230, 233);
+	}
 `;
 
 const Box = styled.div`
 	border-bottom: 1px solid rgb(226, 230, 233);
 	padding-top: 10px;
 	padding-bottom: 10px;
+    background-color: #fff;
+`;
+
+const ContactBox = styled(Box)`
+	text-align: right;
+	display: ${props => props.render ? 'block' : 'none'};
+
+	@media ${device.tabletL} {
+		text-align: left;
+		display: block;
+	}	
+`;
+
+
+const MenuBox = styled(Box)`
+	display: none;
+	
+	@media ${device.tabletL} {
+		display: block;
+	}
 `;
 
 const BoxTitle = styled.div`
@@ -37,17 +66,19 @@ const BoxItem = styled.div`
 `;
 
 const BoxLinkItem = styled(BoxItem)`
-	&:hover {
-		background-color: rgb(254, 244, 220);
-	}
-
-	&:active {
-		background-color: rgb(250, 225, 87);
+	&:hover, &:active {
+		background-color: rgb(3, 136, 252);
+		color: #fff;
 	}
 `;
 
-const RowFlexBox = styled.div`
+const FlexBox = styled.div`
 	display: flex;
+	align-items: center;
+`;
+
+const SpreadFlexBox = styled(FlexBox)`
+	justify-content: space-between;
 `;
 
 const ImageWrapper = styled.div`
@@ -89,23 +120,39 @@ const MenuItem = styled.li``;
 // data
 
 export default function Menu({ prjts }) {
+	// the default val is dependent on the viewport size.
+	const [showContact, setShowContact] = useState(false);
+	const [showContactBtn, setshowContactBtn] = useState(false);
+
+	const toggleContact = () => setShowContact((prev) => !prev);
+	
+	const handleWindowResize = (evt) => {
+		const viewportWidth = evt.target.innerWidth;
+		setshowContactBtn(viewportWidth < 1024);
+	}
+	
+	useEventListener(window, 'resize', handleWindowResize);
+
 	return (
 		<SideBarWrapper>
 			<Box>
-				<RowFlexBox>
-					<ImageWrapper>
-						<Image src="/portfolio/images/youjin.jpg" alt="Youjin's profile" />
-					</ImageWrapper>
+				<SpreadFlexBox>
+					<FlexBox>
+						<ImageWrapper>
+							<Image src="/portfolio/images/youjin.jpg" alt="Youjin's profile" />
+						</ImageWrapper>
 
-					<NameWrapper>
-						<Name>Yujin Choi</Name>
-					</NameWrapper>
-				</RowFlexBox>
+						<NameWrapper>
+							<Name>Yujin Choi</Name>
+						</NameWrapper>
+					</FlexBox>
+
+					<Btn render={showContactBtn} label={<BiPlus/>} title={showContact ? '연락처 접기' : '연락처 보기'} open={showContact} onClick={toggleContact}></Btn>
+				</SpreadFlexBox>
 			</Box>
 
-			<Box>
+			<ContactBox render={showContact}>
 				<BoxTitle>Contact</BoxTitle>
-				<BoxItem>+82 10-5670-0641</BoxItem>
 				<BoxItem>estele.choi@gmail.com</BoxItem>
 				<BoxLinkItem>
 					<a
@@ -123,9 +170,9 @@ export default function Menu({ prjts }) {
 						Github
 					</a>
 				</BoxLinkItem>
-			</Box>
+			</ContactBox>
 
-			<Box>
+			<MenuBox>
 				<BoxTitle>Projects</BoxTitle>
 				<nav>
 					<MenuList>
@@ -140,7 +187,7 @@ export default function Menu({ prjts }) {
 						))}
 					</MenuList>
 				</nav>
-			</Box>
+			</MenuBox>
 		</SideBarWrapper>
 	);
 }
