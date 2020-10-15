@@ -32,6 +32,7 @@ export default function Main({ prjts }) {
 						idName={prjt.idName}
 						head={prjt.title}
 						subHead={prjt.subTitle}
+						skills={prjt.skills}
 						repoUrl={prjt.repoUrl}
 						img={prjt.img}
 						desc={prjt.desc}
