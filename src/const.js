@@ -113,4 +113,33 @@ export const prjts = [
 		],
 		desc: [],
 	},
+	{
+		idName: "skylife",
+		title: "KT Skylife",
+		subTitle:
+			"A Website for KT Skylife telemarketers. Built with Vue.js.",
+		skills: ['js', 'vue', 'java', 'spring'],
+		type: ['Website / CRUD'],
+		img: [
+			{
+				src: "/portfolio/images/skylife.png",
+				alt: "KT Skylife website preview",
+			},
+		],
+		desc: [],
+	},
+	{
+		idName: "konect",
+		title: "Konect",
+		subTitle: "A Website for Konect. Built with Vue.js",
+		skills: ['js', 'vue', 'java', 'spring'],
+		type: ['Website / CRUD'],
+		img: [
+			{
+				src: "/portfolio/images/konect.png",
+				alt: "Konect website preview",
+			},
+		],
+		desc: [],
+	},
 ];
