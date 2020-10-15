@@ -1,26 +1,49 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { useEventListener } from "./../hooks/useEventListener";
 import styled from "styled-components";
+import { device } from "./../deviceSize";
 import PrjtBox from "./PrjtBox";
 
 // styled components
 const MainWrapper = styled.main`
-	padding: 60px 0 0 250px;
+	padding: 120px 0 0;	
+	display: flex;
+	justify-content: center;
+
+
+	@medis ${device.tablet} {
+		padding-top: 180px;
+	}
+
+	@media ${device.tabletL} {
+		padding-top: 60px;
+		padding-left: 250px;
+	}
 `;
 
 const MainInner = styled.div`
-	width: 585px;
-	margin: 0 auto;
+	max-width: 585px;
+	width: 88%;
+
+	@media ${device.tablet} {
+		width: 100%;		
+	}
+
+	@media ${device.laptop} {
+		max-width: 999px;
+	}
 `;
 
 // data
 
 export default function Main({ prjts }) {
 	const mainInner = useRef();
-	let mainWidth = useRef(585);
+	const [mainWidth, setMainWidth]  = useState(585);
 
-	const setNewWidth = () => (mainWidth.current = mainInner.current.clientWidth);
+	const setNewWidth = () => (setMainWidth(mainInner.current.clientWidth));
 
-	useEffect(setNewWidth, []);
+	useEffect(() => setNewWidth(), []);
+	useEventListener(window, 'resize', setNewWidth);
 	// useEventListener Hook will be made soon to handle resize event.
 
 	return (
@@ -33,10 +56,11 @@ export default function Main({ prjts }) {
 						head={prjt.title}
 						subHead={prjt.subTitle}
 						skills={prjt.skills}
+						type={prjt.type}
 						repoUrl={prjt.repoUrl}
 						img={prjt.img}
 						desc={prjt.desc}
-						width={mainWidth.current}
+						width={mainWidth}
 					></PrjtBox>
 				))}
 			</MainInner>
