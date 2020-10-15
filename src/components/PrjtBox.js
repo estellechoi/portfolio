@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+import SkillIcon from "./SkillIcon";
 
+// styled components
 const Wrapper = styled.article`
 	margin-bottom: 80px;
 `;
@@ -21,6 +23,15 @@ const SubHead = styled.h3`
 	font-size: 17px;
 	color: rgb(102, 110, 117);
 	line-height: 1.5;
+`;
+
+const IconBox = styled.div`
+	margin: 0 0 36px;
+	display: flex;
+
+	& > * {
+		margin-right: 20px;
+	}
 `;
 
 const ABox = styled.div`
@@ -110,11 +121,22 @@ export default function PrjtBox({
 	idName,
 	head,
 	subHead,
+	skills,
 	repoUrl,
 	img,
 	desc,
 	width,
 }) {
+	// data
+	const skillImageUrl = {
+		html5: 'html5.png',
+		css3: 'css3.png',
+		js: 'js.png',
+		vue: 'vue.png',
+		react: 'react.png',
+		'styled-components': 'styled-components.png'
+	}
+
 	// state
 	const [slideCnt, setSlideCnt] = useState(0);
 	const lastCnt = img.length - 1;
@@ -143,6 +165,10 @@ export default function PrjtBox({
 		<Wrapper id={idName}>
 			<Head>{head}</Head>
 			<SubHead>{subHead}</SubHead>
+
+				<IconBox>
+					{skills.map(skill => <SkillIcon src={`/portfolio/images/${skillImageUrl[skill]}`} alt={"HTML5 icon"}></SkillIcon>)}
+				</IconBox>
 			<ABox>
 				<A href={repoUrl}>Click here to visit the repository.</A>
 			</ABox>
