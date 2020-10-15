@@ -11,6 +11,7 @@ function App() {
 			title: "Bad Habit Club",
 			subTitle:
 				"This is a shopping site of Bad Habit Club introducing brand archives and selling goods. Built with Vue.js.",
+			skills: ['html5', 'css3', 'js', 'vue'],
 			repoUrl: "https://github.com/estellechoi/badhabitclub-fe",
 			img: [
 				{
@@ -57,6 +58,7 @@ function App() {
 			title: "Canvas",
 			subTitle:
 				"A simple painting board built with <canvas> element and pure JavaScript. Draw some lines, change line width and fill the whole canvas with your own color. Exporting your work on the canvas as a PNG file is also available.",
+			skills: ['html5', 'css3', 'js'],
 			repoUrl: "https://github.com/estellechoi/canvas",
 			img: [
 				{
@@ -71,6 +73,7 @@ function App() {
 			title: "CEPO homepage",
 			subTitle:
 				"A draft markup for responsive website of CEPO, a company that develops GIS services.",
+			skills: ['html5', 'css3'],
 			repoUrl: "https://github.com/estellechoi/cepo",
 			img: [
 				{
@@ -85,6 +88,7 @@ function App() {
 			title: "Ruby Potato",
 			subTitle:
 				"Ruby Potato is a markdown editor for designers and front-end engineers to create their own design system.",
+			skills: ['html5', 'css3', 'js', 'react', 'styled-components'],
 			repoUrl: "https://github.com/estellechoi/ruby-potato",
 			img: [
 				{
@@ -99,6 +103,7 @@ function App() {
 			title: "Raycasting 3D Engine",
 			subTitle:
 				"A Raycasting algorithm based engine that renders a semi-3D map in realtime, creating first-person view exploration of a maze-looking space with walls. Built with JavaScript.",
+			skills: ['js'],
 			repoUrl: "https://github.com/estellechoi/javascript-raycasting",
 			img: [
 				{
