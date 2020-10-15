@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+import { device } from "./../deviceSize";
 import SkillIcon from "./SkillIcon";
+import { IconContext } from "react-icons";
+import { AiFillGithub } from "react-icons/ai";
 
 // styled components
 const Wrapper = styled.article`
@@ -34,17 +37,21 @@ const IconBox = styled.div`
 	}
 `;
 
-const ABox = styled.div`
+const Comment = styled.div`
+	display: inline-flex;
 	margin-bottom: 40px;
 	padding-left: 20px;
 	border-left: 3px solid #e5e5e5;
+	color: rgb(102,110,117);
+	font-size: 0.9em;
 `;
 
-const A = styled.a`
+const RepoLink = styled.a`
+	margin-left: 20px;
 	color: #7d7d7d;
+
 	&:hover {
 		color: rgb(149, 108, 50);
-		text-decoration: underline;
 	}
 `;
 
@@ -77,11 +84,15 @@ const ImageSlider = styled.div`
 	height: 100%;
 	z-index: 2;
 	background-color: transparent;
-	opacity: 0;
 	transition: opacity 0.4s;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	opacity: 1;
+
+	@media ${device.laptop} {
+		opacity: 0;
+	}
 
 	&:hover {
 		opacity: 1;
@@ -122,6 +133,7 @@ export default function PrjtBox({
 	head,
 	subHead,
 	skills,
+	type,
 	repoUrl,
 	img,
 	desc,
@@ -167,11 +179,16 @@ export default function PrjtBox({
 			<SubHead>{subHead}</SubHead>
 
 				<IconBox>
-					{skills.map(skill => <SkillIcon src={`/portfolio/images/${skillImageUrl[skill]}`} alt={"HTML5 icon"}></SkillIcon>)}
+					{skills.map((skill, index) => <SkillIcon key={index} src={`/portfolio/images/${skillImageUrl[skill]}`} alt={`${skill} icon`}></SkillIcon>)}
 				</IconBox>
-			<ABox>
-				<A href={repoUrl}>Click here to visit the repository.</A>
-			</ABox>
+			<Comment>
+				{type.join(" / ")}
+				<RepoLink href={repoUrl} title="Visiting the repository of this project">
+					<IconContext.Provider value={{size: '1.2em'}}>
+						<AiFillGithub/>
+					</IconContext.Provider>
+				</RepoLink>
+			</Comment>
 
 			<Desc>
 				<DescTitle>Preview</DescTitle>
