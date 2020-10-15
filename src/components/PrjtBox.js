@@ -146,7 +146,9 @@ export default function PrjtBox({
 		js: 'js.png',
 		vue: 'vue.png',
 		react: 'react.png',
-		'styled-components': 'styled-components.png'
+		'styled-components': 'styled-components.png',
+		java: 'java.png',
+		spring: 'spring.png'
 	}
 
 	// state
@@ -183,11 +185,14 @@ export default function PrjtBox({
 				</IconBox>
 			<Comment>
 				{type.join(" / ")}
-				<RepoLink href={repoUrl} title="Visiting the repository of this project">
-					<IconContext.Provider value={{size: '1.2em'}}>
-						<AiFillGithub/>
-					</IconContext.Provider>
-				</RepoLink>
+				{!repoUrl ? null : (
+					<RepoLink href={repoUrl} title="Visiting the repository of this project">
+						<IconContext.Provider value={{size: '1.2em'}}>
+							<AiFillGithub/>
+						</IconContext.Provider>
+					</RepoLink>
+				)}
+				
 			</Comment>
 
 			<Desc>
