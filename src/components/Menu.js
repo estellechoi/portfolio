@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useEventListener } from "./../hooks/useEventListener";
 import styled from "styled-components";
 import { device } from "./../deviceSize";
@@ -126,10 +126,12 @@ export default function Menu({ prjts }) {
 
 	const toggleContact = () => setShowContact((prev) => !prev);
 	
-	const handleWindowResize = (evt) => {
-		const viewportWidth = evt.target.innerWidth;
+	const handleWindowResize = () => {
+		const viewportWidth = window.innerWidth;
 		setshowContactBtn(viewportWidth < 1024);
 	}
+
+	useEffect(() => handleWindowResize(),[]);
 	
 	useEventListener(window, 'resize', handleWindowResize);
 
