@@ -72,6 +72,8 @@ const DescContent = styled.div``;
 const ImageWrapper = styled.div`
 	border-radius: 10px;
 	box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-height: 290px;
 	overflow: hidden;
 	position: relative;
 `;
@@ -204,6 +206,8 @@ export default function PrjtBox({
 								type="button"
 								onClick={slideBefore}
 								hide={isFirst}
+								aria-hidden={isFirst}
+								aria-label="이전 이미지"
 							>
 								←
 							</ImageSliderBtn>
@@ -211,6 +215,8 @@ export default function PrjtBox({
 								type="button"
 								onClick={slideNext}
 								hide={isLast}
+								aria-hidden={isLast}
+								aria-label="다음 이미지"
 							>
 								→
 							</ImageSliderBtnNext>
