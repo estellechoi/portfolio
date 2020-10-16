@@ -76,6 +76,10 @@ const ImageWrapper = styled.div`
 	max-height: 290px;
 	overflow: hidden;
 	position: relative;
+
+    @media ${device.tabletL} {
+		max-height: none;
+	}
 `;
 
 const ImageSlider = styled.div`
