@@ -128,6 +128,7 @@ const ImageBundle = styled.div`
 
 const Image = styled.img`
 	width: 100%;
+	height: 100%;
 `;
 
 export default function PrjtBox({
