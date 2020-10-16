@@ -77,7 +77,7 @@ const ImageWrapper = styled.div`
 	overflow: hidden;
 	position: relative;
 
-    @media ${device.tabletL} {
+    @media ${device.tablet} {
 		max-height: none;
 	}
 `;
