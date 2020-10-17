@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { device } from "./../deviceSize";
 import SkillIcon from "./SkillIcon";
 import { IconContext } from "react-icons";
-import { AiFillGithub } from "react-icons/ai";
+import { AiFillGithub, AiTwotoneExperiment } from "react-icons/ai";
+
 
 // styled components
 const Wrapper = styled.article`
@@ -26,6 +27,7 @@ const SubHead = styled.h3`
 	font-size: 17px;
 	color: rgb(102, 110, 117);
 	line-height: 1.5;
+	white-space: pre-line;
 `;
 
 const IconBox = styled.div`
@@ -41,7 +43,7 @@ const Comment = styled.div`
 	display: inline-flex;
 	margin-bottom: 40px;
 	padding-left: 20px;
-	border-left: 3px solid #e5e5e5;
+	border-left: 3px solid rgb(229, 229, 229);
 	color: rgb(102,110,117);
 	font-size: 0.9em;
 `;
@@ -135,17 +137,19 @@ const Image = styled.img`
 	height: 100%;
 `;
 
-export default function PrjtBox({
+export default React.forwardRef(
+function PrjtBox({
 	idName,
 	head,
 	subHead,
 	skills,
 	type,
+	complete,
 	repoUrl,
 	img,
 	desc,
-	width,
-}) {
+	width
+}, ref) {
 	// data
 	const skillImageUrl = {
 		html5: 'html5.png',
@@ -183,8 +187,8 @@ export default function PrjtBox({
 
 	// dom
 	return (
-		<Wrapper id={idName}>
-			<Head>{head}</Head>
+		<Wrapper id={idName} ref={ref}>
+			<Head>{head} {complete ? null : <AiTwotoneExperiment title="This project is in an early stage"/>}</Head>
 			<SubHead>{subHead}</SubHead>
 
 				<IconBox>
@@ -244,4 +248,4 @@ export default function PrjtBox({
 			))}
 		</Wrapper>
 	);
-}
+});
