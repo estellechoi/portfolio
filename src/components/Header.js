@@ -21,10 +21,10 @@ const HeaderWrapper = styled.header`
 
 `;
 
-export default function Header({ prjts }) {
+export default function Header({ prjts, activeId }) {
     return (
         <HeaderWrapper>
-            <Menu prjts={prjts}></Menu>
+            <Menu prjts={prjts} activeId={activeId}></Menu>
         </HeaderWrapper>
     );
 };
