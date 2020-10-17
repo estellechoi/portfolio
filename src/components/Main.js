@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useEventListener } from "./../hooks/useEventListener";
+import { useIntersectionObserver } from "./../hooks/useIntersectionObserver";
 import styled from "styled-components";
 import { device } from "./../deviceSize";
 import PrjtBox from "./PrjtBox";
@@ -36,7 +37,9 @@ const MainInner = styled.div`
 
 // data
 
-export default function Main({ prjts }) {
+export default function Main({ prjts, observerHandler }) {
+	const prjtBoxs = useRef([]);
+	prjtBoxs.current = Array(prjts.length).fill().map(() => React.createRef());
 	const mainInner = useRef();
 	const [mainWidth, setMainWidth]  = useState(585);
 
@@ -44,19 +47,21 @@ export default function Main({ prjts }) {
 
 	useEffect(() => setNewWidth(), []);
 	useEventListener(window, 'resize', setNewWidth);
-	// useEventListener Hook will be made soon to handle resize event.
+	useIntersectionObserver(prjtBoxs.current, { threshold: 0.6 }, observerHandler);
 
 	return (
-		<MainWrapper role="main">
+		<MainWrapper role="main"> 
 			<MainInner ref={mainInner}>
 				{prjts.map((prjt, index) => (
 					<PrjtBox
+					    ref={prjtBoxs.current[index]}
 						key={index}
 						idName={prjt.idName}
 						head={prjt.title}
 						subHead={prjt.subTitle}
 						skills={prjt.skills}
 						type={prjt.type}
+						complete={prjt.complete}
 						repoUrl={prjt.repoUrl}
 						img={prjt.img}
 						desc={prjt.desc}
