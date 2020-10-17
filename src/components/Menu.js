@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { device } from "./../deviceSize";
 import Btn from "./Btn"
 import { BiPlus } from "react-icons/bi";
+import { AiTwotoneExperiment } from "react-icons/ai";
+
 
 
 
@@ -66,8 +68,15 @@ const BoxItem = styled.div`
 `;
 
 const BoxLinkItem = styled(BoxItem)`
-	&:hover, &:active {
-		background-color: rgb(3, 136, 252);
+	background-color: ${props => props.active ? "rgb(70, 128, 233)" : "none" };
+	color: ${props => props.active ? "#fff" : "inherit" };
+	
+	&:hover {
+		background-color: ${props => props.active ? "rgb(70, 128, 233)" : "rgba(229, 229, 229, 0.5)"};
+	} 
+	
+	&:active {
+		background-color: rgb(70, 128, 233);
 		color: #fff;
 	}
 `;
@@ -107,7 +116,7 @@ const Name = styled.span`
 	font-weight: 400;
 	color: rgb(40, 43, 46);
 	font-size: 11px;
-	border: 1px solid #e5e5e5;
+	border: 1px solid rgb(229, 229, 229);
 	border-radius: 10px;
 	padding: 2px 6px;
 	letter-spacing: 0.6px;
@@ -119,7 +128,7 @@ const MenuItem = styled.li``;
 
 // data
 
-export default function Menu({ prjts }) {
+export default function Menu({ prjts, activeId }) {
 	// the default val is dependent on the viewport size.
 	const [showContact, setShowContact] = useState(false);
 	const [showContactBtn, setshowContactBtn] = useState(false);
@@ -187,9 +196,9 @@ export default function Menu({ prjts }) {
 					<MenuList>
 						{prjts.map((prjt, index) => (
 							<MenuItem key={index}>
-								<BoxLinkItem>
+								<BoxLinkItem active={prjt.idName === activeId}>
 									<a href={`/portfolio/#${prjt.idName}`} alt={prjt.title}>
-										{prjt.title}
+										{prjt.title} {prjt.complete ? null : <AiTwotoneExperiment/>}
 									</a>
 								</BoxLinkItem>
 							</MenuItem>
