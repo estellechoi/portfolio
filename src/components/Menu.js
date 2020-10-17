@@ -155,11 +155,18 @@ export default function Menu({ prjts }) {
 
 			<ContactBox render={showContact}>
 				<BoxTitle>Contact</BoxTitle>
-				<BoxItem>estele.choi@gmail.com</BoxItem>
+				<BoxLinkItem>
+					<a
+						href="mailto:estele.choi@gmail.com"
+						title="Send email to this address"
+					>
+						estele.choi@gmail.com
+					</a>
+				</BoxLinkItem>
 				<BoxLinkItem>
 					<a
 						href="https://www.linkedin.com/in/yujin-choi-460a931b2/"
-						alt="Moving to LinkedIn profile"
+						title="Move to Yujin's LinkedIn profile"
 					>
 						LinkedIn
 					</a>
@@ -167,7 +174,7 @@ export default function Menu({ prjts }) {
 				<BoxLinkItem>
 					<a
 						href="https://github.com/estellechoi"
-						alt="Moving to Github profile"
+						title="Move to Yujin's Github profile"
 					>
 						Github
 					</a>
